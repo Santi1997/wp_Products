@@ -1,24 +1,136 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+﻿
+@{
+    ViewBag.Title = "Productos";
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+@*Tabla para mostrar datos *@
+<div class="col-md-9 col-md-offset-0" style="margin-left:2px; margin-top:40px">
+    <button class="btn btn-primary" name="registrar" id="registrar"><i class="glyphicon glyphicon-floppy-disk"></i> Registrar un producto</button>
 </div>
+<div class="col-md-12 col-md-offset-0" style="margin-top:20px
+    ">
+    <table id="tablaList" class="table table-bordered"
+           width="100%">
+        <thead>
+            <tr>
+                <th>Identificador</th>
+                <th>Nombre</th>
+                <th>Descripci&oacute;n</th>
+                <th>Estado</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+
+    </footer>
+</div>
+
+@*Modal para registrar*@
+
+
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+    <div class="col-md-6">
+        <div class="modal fade" id="mod_product" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content col-md-7 col-md-offset-2">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-floppy-disk"></span>  Registrar producto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 col-md-offset-2" style="padding-bottom: 10px">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del producto" />
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-md-offset-2" style="padding-bottom: 10px">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-comment"></i>
+                                    </span>
+                                    <textarea placeholder="Descripción del producto..." class="form-control" id="descripcion" name="descripcion" cols="50" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="producto.add();" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>  Guardar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="cerrar" name="cerrar"> <span class="glyphicon glyphicon-remove"></span> Cerrar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+
+@* Modal para modificar*@
+<div class="row">
+    <div class="col-md-6">
+        <div class="modal fade" id="mod_edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content col-md-7 col-md-offset-2">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-floppy-disk"></span>  Modificar producto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12 col-md-offset-2" style="padding-bottom: 10px">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="edit_nombre" name="edit_nombre" placeholder="Ingrese el nombre del producto" />
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-md-offset-2" style="padding-bottom: 10px">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-ok-circle"></i>
+                                    </span>
+                                    <select id="edit_estado" class="form-control">
+                                        <option value="">Seleccionar un estado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-md-offset-2" style="padding-bottom: 10px">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-comment"></i>
+                                    </span>
+                                    <textarea placeholder="Descripción del producto..." class="form-control" id="edit_descrip" name="edit_descrip" cols="50" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btn_crear" onclick="producto.actualizar()" value="" class="btn btn-primary"><span class="glyphicon  glyphicon-floppy-save"></span>  Actualizar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" id="edit_cerrar" name="cerrar">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $('#tableList').DataTable({
+            Processing: true,
+            ServerSide: true,
+        });
+        producto.table_producto();
+    });
+</script>

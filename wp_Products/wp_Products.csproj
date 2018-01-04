@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -53,6 +59,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -178,9 +185,26 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Producto.cs">
+      <DependentUpon>Products.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Products.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Products.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Products.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Products.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>Products.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -188,9 +212,58 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap4.css" />
+    <Content Include="Content\datatable.bootstrap.min.css" />
+    <Content Include="Content\datatable.bootstrap4.min.css" />
+    <Content Include="Content\datatable.css" />
+    <Content Include="Content\datatable\css\dataTables.bootstrap.css" />
+    <Content Include="Content\datatable\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\datatable\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\datatable\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\datatable\css\dataTables.foundation.css" />
+    <Content Include="Content\datatable\css\dataTables.foundation.min.css" />
+    <Content Include="Content\datatable\css\dataTables.jqueryui.css" />
+    <Content Include="Content\datatable\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\datatable\css\dataTables.semanticui.css" />
+    <Content Include="Content\datatable\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\datatable\css\jquery.dataTables.css" />
+    <Content Include="Content\datatable\css\jquery.dataTables.min.css" />
+    <Content Include="Content\datatable\images\sort_asc.png" />
+    <Content Include="Content\datatable\images\sort_asc_disabled.png" />
+    <Content Include="Content\datatable\images\sort_both.png" />
+    <Content Include="Content\datatable\images\sort_desc.png" />
+    <Content Include="Content\datatable\images\sort_desc_disabled.png" />
+    <Content Include="Content\datatable\js\dataTables.bootstrap.js" />
+    <Content Include="Content\datatable\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\datatable\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\datatable\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\datatable\js\dataTables.foundation.js" />
+    <Content Include="Content\datatable\js\dataTables.foundation.min.js" />
+    <Content Include="Content\datatable\js\dataTables.jqueryui.js" />
+    <Content Include="Content\datatable\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\datatable\js\dataTables.semanticui.js" />
+    <Content Include="Content\datatable\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\datatable\js\jquery.dataTables.js" />
+    <Content Include="Content\datatable\js\jquery.dataTables.min.js" />
+    <Content Include="Content\metisMenu.min.css" />
+    <Content Include="Content\morris.css" />
+    <Content Include="Content\pnotify.custom.min.css" />
+    <Content Include="Content\Productos.css" />
+    <Content Include="Content\sb-admin-2.css" />
+    <Content Include="Content\sb-admin-2.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Models\Products.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Products.Context.cs</LastGenOutput>
+      <DependentUpon>Products.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Products.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Products.edmx</DependentUpon>
+      <LastGenOutput>Products.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -215,12 +288,32 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="Models\Products.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Products.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Products.edmx.diagram">
+      <DependentUpon>Products.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap4.min.js" />
+    <Content Include="Scripts\Categorias.js" />
+    <Content Include="Scripts\datatable.bootstrap.min.js" />
+    <Content Include="Scripts\datatable.js" />
+    <Content Include="Scripts\flot-data.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.datatable.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\morris-data.js" />
+    <Content Include="Scripts\morris.min.js" />
+    <Content Include="Scripts\pnotify.min.js" />
+    <Content Include="Scripts\Productos.js" />
+    <Content Include="Scripts\raphael.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sb-admin-2.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -238,7 +331,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -252,6 +344,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

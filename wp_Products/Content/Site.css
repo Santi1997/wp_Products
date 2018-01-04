@@ -1,7 +1,16 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: whitesmoke;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+
 }
+
+#containerA {
+    background-color: #1D1A19;
+}
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -15,3 +24,5 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
